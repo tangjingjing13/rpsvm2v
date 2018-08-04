@@ -1,11 +1,11 @@
 clear
 load ('ionosphere.mat');
 
-X1=mapminmax(X1',0,1);
-X2=mapminmax(X2',0,1);
+x1=mapminmax(x1',0,1);
+x2=mapminmax(x2',0,1);
 
-data=X1';
-data2=X2';
+data=x1';
+data2=x2';
 [M,N]=size(data);
 g=2;c=1;d=1;gamma=0.1;
 tic
@@ -19,9 +19,9 @@ for k=1:5
     test_data=data(test,:);
     test_data2=data2(test,:);
     test_target=y(test,:);
-    
+
     model=rpsvm2v(train_data,train_data2,train_target,'rbf',c,c,d,g,gamma);
-    [accuracy(k),accuracy1(k),accuracy2(k)]=predict_rpsvm2v(model,test_data,test_data2,test_target);
+    accuracy(k)=predict_rpsvm2v(model,test_data,test_data2,test_target);
     clear model;
 end
 accuracy21=mean(accuracy);
